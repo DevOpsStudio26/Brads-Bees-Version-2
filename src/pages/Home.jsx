@@ -197,10 +197,10 @@ export default function Home() {
                     <MapPin />
                   </span>
                   <div>
-                    <p className="contact-info-text">{siteInfo.street}</p>
                     <a href={siteInfo.mapsUrl} target="_blank" rel="noopener noreferrer">
                       {siteInfo.cityStateZip}
                     </a>
+                    <p className="contact-info-subtext">Pickup address sent after you order</p>
                   </div>
                 </li>
                 <li className="contact-info-item">

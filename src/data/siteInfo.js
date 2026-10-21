@@ -8,9 +8,7 @@ export const siteInfo = {
   phoneAvailability: '24/7 Emergency Service',
   email: 'bradbessetti@gmail.com',
   emailResponse: 'Response within 24 hours',
-  street: '123 Honey Lane',
   cityStateZip: 'Sun, LA 70463',
-  address: '123 Honey Lane, Sun, LA 70463',
   mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Sun,+LA+70463',
   hours: [
     { days: 'Mon - Fri', time: '8:00 AM - 6:00 PM' },

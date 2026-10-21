@@ -59,11 +59,11 @@ export const productCatalog = [
   },
 ]
 
-export const SHIPPING_THRESHOLD = 50
-export const FLAT_SHIPPING = 5
-
-export function shippingFor(subtotal) {
-  return subtotal === 0 || subtotal >= SHIPPING_THRESHOLD ? 0 : FLAT_SHIPPING
+// Brad doesn't ship: customers pick up for free or he delivers locally for free.
+// To add a delivery fee later, return it here and it flows to the cart,
+// checkout, and order email.
+export function shippingFor() {
+  return 0
 }
 
 export function getCatalogProduct(id) {

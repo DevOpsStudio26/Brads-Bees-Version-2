@@ -10,6 +10,7 @@ import Checkout from './pages/Checkout'
 import Education from './pages/Education'
 import Gallery from './pages/Gallery'
 import Contact from './pages/Contact'
+import NotFound from './pages/NotFound'
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
               <Route path="/education" element={<Education />} />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
         </BrowserRouter>

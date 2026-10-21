@@ -77,7 +77,7 @@ export default function Checkout() {
                 <span>${subtotal.toFixed(2)}</span>
               </div>
               <div className="flex justify-between">
-                <span>Shipping</span>
+                <span>Pickup / Delivery</span>
                 <span>{shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`}</span>
               </div>
             </div>

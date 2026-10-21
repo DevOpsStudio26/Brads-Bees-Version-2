@@ -61,7 +61,7 @@ export default function CheckoutForm({ onSuccess }) {
   }
 
   const inputClass =
-    'w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-navy outline-none transition placeholder:text-gray-400 focus:border-gold focus:ring-1 focus:ring-gold'
+    'w-full rounded-lg border border-gray-300 bg-white px-3 py-2.5 text-base text-navy outline-none transition placeholder:text-gray-400 focus:border-gold focus:ring-1 focus:ring-gold'
   const labelClass = 'mb-1 block text-sm font-medium text-navy'
   const errorClass = 'mt-1 text-xs text-error'
 
@@ -127,7 +127,7 @@ export default function CheckoutForm({ onSuccess }) {
           className={inputClass}
           value={form.address}
           onChange={(e) => update('address', e.target.value)}
-          placeholder="123 Honey Lane"
+          placeholder="Street address"
         />
         {errors.address && <p className={errorClass}>{errors.address}</p>}
       </div>

@@ -133,10 +133,22 @@
   }
 }
 
+@media (max-width: 480px) {
+  .footer-logo {
+    width: 110px;
+    height: 110px;
+    margin-block: -14px;
+  }
+
+  .site-footer h3 {
+    font-size: 1.6rem;
+  }
+}
+
 /* Give footer links a bigger tap area on touch screens (phones and tablets) */
 @media (pointer: coarse) {
   .site-footer a {
     display: inline-block;
-    padding-block: 8px;
+    padding-block: 10px;
   }
 }

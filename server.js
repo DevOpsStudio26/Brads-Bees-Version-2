@@ -200,7 +200,7 @@ app.post('/api/order', rateLimit, express.json({ limit: '50kb' }), async (req, r
     .join('')
   const totals = [
     ['Subtotal', money(subtotal)],
-    ['Shipping', shipping ? money(shipping) : 'Free'],
+    ['Pickup / Delivery', shipping ? money(shipping) : 'Free'],
     ['Total', money(total)],
   ]
     .map(

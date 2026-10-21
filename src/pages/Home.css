@@ -428,6 +428,16 @@
   color: var(--gray-600);
 }
 
+/* Bigger tap area for the phone, email and map links on touch screens,
+   without changing the spacing you see */
+@media (pointer: coarse) {
+  .contact-info-item a {
+    display: inline-block;
+    padding-block: 0.65rem;
+    margin-block: -0.65rem;
+  }
+}
+
 /* =========================================================
    Responsive
    ========================================================= */

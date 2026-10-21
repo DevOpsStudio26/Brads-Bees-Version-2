@@ -50,24 +50,24 @@ export default function Cart() {
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <div className="flex items-center gap-2 rounded-full border border-gray-300 px-2 py-1">
+                  <div className="flex items-center gap-1 rounded-full border border-gray-300">
                     <button
                       type="button"
                       onClick={() => updateQty(item.id, item.qty - 1)}
-                      className="text-navy disabled:opacity-30"
+                      className="grid h-10 w-10 place-items-center rounded-full text-navy hover:bg-gray-100 disabled:opacity-30"
                       disabled={item.qty <= 1}
                       aria-label="Decrease quantity"
                     >
-                      <Minus size={14} />
+                      <Minus size={16} />
                     </button>
                     <span className="w-6 text-center text-sm font-medium">{item.qty}</span>
                     <button
                       type="button"
                       onClick={() => updateQty(item.id, item.qty + 1)}
-                      className="text-navy"
+                      className="grid h-10 w-10 place-items-center rounded-full text-navy hover:bg-gray-100"
                       aria-label="Increase quantity"
                     >
-                      <Plus size={14} />
+                      <Plus size={16} />
                     </button>
                   </div>
                   <span className="w-16 text-right font-semibold text-navy">
@@ -76,7 +76,7 @@ export default function Cart() {
                   <button
                     type="button"
                     onClick={() => removeItem(item.id)}
-                    className="text-error hover:opacity-70"
+                    className="grid h-10 w-10 place-items-center rounded-full text-error hover:bg-red-50"
                     aria-label={`Remove ${productLabel(item)}`}
                   >
                     <Trash2 size={18} />
@@ -94,14 +94,9 @@ export default function Cart() {
                 <span>${subtotal.toFixed(2)}</span>
               </div>
               <div className="flex justify-between">
-                <span>Shipping</span>
+                <span>Pickup / Delivery</span>
                 <span>{shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`}</span>
               </div>
-              {shipping > 0 && (
-                <p className="text-xs text-gray-400">
-                  Free shipping on orders over $50
-                </p>
-              )}
             </div>
             <div className="mt-4 flex justify-between border-t border-gray-200 pt-4 text-base font-bold text-navy">
               <span>Total</span>
