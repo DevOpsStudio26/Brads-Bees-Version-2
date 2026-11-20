@@ -21,14 +21,14 @@
 
 .not-found h1 {
   margin: 0 0 0.75rem;
-  color: var(--navy);
+  color: var(--heading);
   font-size: 2.2rem;
   line-height: 1.2;
 }
 
 .not-found p {
   margin: 0 0 2rem;
-  color: var(--gray-600);
+  color: var(--text-muted);
   font-size: 1.1rem;
 }
 
@@ -60,13 +60,13 @@
 }
 
 .not-found-secondary {
-  border: 2px solid var(--navy);
-  color: var(--navy);
+  border: 2px solid var(--heading);
+  color: var(--heading);
 }
 
 .not-found-secondary:hover {
-  background: var(--navy);
-  color: var(--white);
+  background: var(--heading);
+  color: var(--card);
 }
 
 @media (max-width: 480px) {

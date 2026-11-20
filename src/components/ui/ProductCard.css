@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background: var(--white);
+  background: var(--card);
   border-radius: 8px;
   box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
   transition: all 0.3s ease;
@@ -18,7 +18,7 @@
   height: 200px;
   object-fit: cover;
   /* Matches the off-white background baked into the product photos */
-  background-color: #fefefe;
+  background-color: var(--product-image-bg);
 }
 
 /* Keep jars fully visible instead of cropped */
@@ -65,16 +65,16 @@
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.03em;
-  color: #21456b;
-  background: #e8f2fc;
-  border: 1px solid #cfe3f7;
+  color: var(--badge-text);
+  background: var(--badge-bg);
+  border: 1px solid var(--badge-border);
   border-radius: 999px;
 }
 
 .product-badge-stock {
-  color: #165d34;
-  background: #e7f7ee;
-  border-color: #c7ebd5;
+  color: var(--badge-stock-text);
+  background: var(--badge-stock-bg);
+  border-color: var(--badge-stock-border);
 }
 
 .product-rating {
@@ -85,7 +85,7 @@
 }
 
 .product-star {
-  color: #dddddd;
+  color: var(--star-empty);
 }
 
 .product-star.filled {
@@ -129,7 +129,7 @@
   justify-content: center;
   gap: 0.5rem;
   padding: 0.5rem 0.5rem 0.5rem 1rem;
-  background: var(--navy);
+  background: var(--btn-dark);
   color: var(--white);
   border: none;
   border-radius: 999px;

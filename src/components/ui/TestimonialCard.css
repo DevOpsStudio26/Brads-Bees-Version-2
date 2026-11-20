@@ -8,7 +8,7 @@
   padding: var(--space-6);
   border-top: 4px solid var(--honey-light);
   border-radius: var(--radius-xl);
-  background-color: var(--white);
+  background-color: var(--card);
   box-shadow: 0 8px 22px rgb(184 106 0 / 0.12);
   text-align: left;
 }
@@ -17,8 +17,8 @@
   align-self: flex-start;
   padding: 3px 10px;
   border-radius: var(--radius-full);
-  background-color: #fdf0c9;
-  color: #92400e;
+  background-color: var(--pill-bg);
+  color: var(--pill-text);
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.03em;
@@ -39,7 +39,7 @@
 .review-text {
   flex: 1;
   margin: 0;
-  color: var(--gray-700);
+  color: var(--text-soft);
   line-height: 1.6;
 }
 
@@ -69,11 +69,11 @@
 }
 
 .review-author-name {
-  color: var(--gray-900);
+  color: var(--text-strong);
   font-weight: 600;
 }
 
 .review-author-location {
-  color: var(--gray-600);
+  color: var(--text-muted);
   font-size: var(--font-size-sm);
 }

@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { Menu, Phone, X } from 'lucide-react'
+import { Menu, Moon, Phone, Sun, X } from 'lucide-react'
 import { siteInfo, navLinks } from '../../data/siteInfo'
+import { useTheme } from '../../hooks/useTheme'
 import brandLogo from '../../assets/images/brand-logo.webp'
 import './Header.css'
 
@@ -10,6 +11,8 @@ export default function Header() {
   // Remember which page the menu was opened on, so it closes itself after navigating.
   const [menuOpenOn, setMenuOpenOn] = useState(null)
   const menuOpen = menuOpenOn === pathname
+  const { theme, toggleTheme } = useTheme()
+  const isDark = theme === 'dark'
 
   useEffect(() => {
     if (!menuOpen) return
@@ -61,6 +64,17 @@ export default function Header() {
             Call Now
           </a>
         </div>
+
+        <button
+          type="button"
+          className="theme-toggle"
+          aria-pressed={isDark}
+          aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+          title={isDark ? 'Light mode' : 'Dark mode'}
+          onClick={toggleTheme}
+        >
+          {isDark ? <Sun size={22} aria-hidden="true" /> : <Moon size={22} aria-hidden="true" />}
+        </button>
       </div>
     </header>
   )

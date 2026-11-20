@@ -18,7 +18,7 @@ export default function Checkout() {
 
   if (placed) {
     return (
-      <div className="bg-[var(--amber-50)]">
+      <div className="bg-[var(--warm)]">
         <div className="mx-auto max-w-xl px-4 py-24 text-center">
           <CheckCircle2 size={56} className="mx-auto mb-4 text-success" />
           <h1 className="mb-2 text-2xl font-bold text-navy">Order Placed!</h1>
@@ -39,7 +39,7 @@ export default function Checkout() {
 
   if (items.length === 0) {
     return (
-      <div className="bg-[var(--amber-50)]">
+      <div className="bg-[var(--warm)]">
         <div className="mx-auto max-w-xl px-4 py-24 text-center">
           <h1 className="mb-2 text-2xl font-bold text-navy">Your cart is empty</h1>
           <p className="mb-6 text-gray-500">Add products before checking out.</p>
@@ -55,11 +55,11 @@ export default function Checkout() {
   }
 
   return (
-    <div className="bg-[var(--amber-50)]">
+    <div className="bg-[var(--warm)]">
       <div className="mx-auto max-w-6xl px-4 py-16">
         <h1 className="mb-8 text-3xl font-bold text-navy">Checkout</h1>
         <div className="grid gap-8 lg:grid-cols-3">
-          <div className="h-fit space-y-4 rounded-xl border border-gray-200 bg-white p-6 shadow-sm lg:order-2">
+          <div className="h-fit space-y-4 rounded-xl border border-gray-200 bg-card p-6 shadow-sm lg:order-2">
             <h2 className="text-lg font-bold text-navy">Order Summary</h2>
             <ul className="space-y-2 text-sm text-gray-600">
               {items.map((item) => (

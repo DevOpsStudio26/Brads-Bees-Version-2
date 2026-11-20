@@ -8,6 +8,8 @@
   --color-navy: #0a1530;
   --color-success: #27ae60;
   --color-error: #e74c3c;
+  /* Follows the light/dark theme (see the theme tokens below) */
+  --color-card: var(--card);
 }
 
 /* =========================================================
@@ -92,6 +94,99 @@
   --font-size-2xl: 1.5rem;
   --font-size-4xl: 2.25rem;
   --font-size-6xl: 3.75rem;
+
+  /* Theme tokens: the colours that change between light and dark mode.
+     Use these (not --white / --gray-900 / --navy) for page and card
+     backgrounds and for body text, so dark mode picks them up. */
+  color-scheme: light;
+  --bg: #ffffff;
+  --card: #ffffff;
+  --warm: var(--amber-50);
+  --text-strong: var(--gray-900);
+  --text-soft: var(--gray-700);
+  --text-muted: var(--gray-600);
+  --heading: var(--navy);
+  --btn-dark: var(--navy);
+  --feature-card: var(--gray-900);
+  --feature-card-hover: var(--gray-800);
+  --product-image-bg: #fefefe;
+  --badge-text: #21456b;
+  --badge-bg: #e8f2fc;
+  --badge-border: #cfe3f7;
+  --badge-stock-text: #165d34;
+  --badge-stock-bg: #e7f7ee;
+  --badge-stock-border: #c7ebd5;
+  --star-empty: #dddddd;
+  --tabs-border: #f0d99a;
+  --tab-count-bg: rgb(0 0 0 / 0.07);
+  --pill-bg: #fdf0c9;
+  --pill-text: #92400e;
+  --why-shop-mid: #fde7a9;
+  --why-shop-end: #f7c95c;
+}
+
+/* =========================================================
+   Dark theme
+   Turned on by data-theme="dark" on <html> (see useTheme.js).
+   Gold stays the same; the neutrals flip to a warm charcoal.
+   ========================================================= */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg: #12151c;
+  --card: #1b202a;
+  --surface: #161a22;
+  --warm: #1a1711;
+  --section-light: #1a1812;
+  --page: #0e1116;
+
+  --text: #e6e8ee;
+  --text-strong: #f3f4f6;
+  --text-soft: #cdd3dd;
+  --text-muted: #a1aab9;
+  --nav-text: #c2c9d6;
+  --heading: #f1f3f8;
+  --btn-dark: #2a3550;
+  --header-border: #262c38;
+
+  --feature-card: #232a38;
+  --feature-card-hover: #2c3446;
+
+  --shop-text: #e6e8ee;
+  --shop-muted: #a1aab9;
+  --shop-bg: #161a22;
+  --shop-border: #2c3340;
+
+  --product-image-bg: #232833;
+  --badge-text: #a9cdf2;
+  --badge-bg: #16263a;
+  --badge-border: #24405f;
+  --badge-stock-text: #8fdcae;
+  --badge-stock-bg: #12291c;
+  --badge-stock-border: #1f4a31;
+  --star-empty: #4a5160;
+  --tabs-border: #4a3a14;
+  --tab-count-bg: rgb(255 255 255 / 0.1);
+  --pill-bg: #3a2b0e;
+  --pill-text: #f5c26b;
+  --why-shop-mid: #2a2215;
+  --why-shop-end: #3d2d10;
+
+  --gray-50: #222834;
+  --success-bg: #12291c;
+  --success-text: #8fdcae;
+
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.4);
+
+  /* Tailwind colours used on the Cart and Checkout pages */
+  --color-navy: #f1f3f8;
+  --color-gray-100: #262c38;
+  --color-gray-200: #2c3340;
+  --color-gray-300: #3a4252;
+  --color-gray-400: #7d8697;
+  --color-gray-500: #a1aab9;
+  --color-gray-600: #b6bdca;
+  --color-red-50: rgb(231 76 60 / 0.15);
 }
 
 /* =========================================================
@@ -107,12 +202,15 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: var(--text);
     /* White matches the header, so it blends in if a browser still bounces */
-    background: var(--white);
+    background: var(--bg);
     line-height: 1.5;
     /* Stop the "rubber band" bounce past the top and bottom of the page */
     overscroll-behavior-y: none;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    transition:
+      background-color 0.25s ease,
+      color 0.25s ease;
   }
 
   a:hover {

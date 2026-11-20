@@ -3,7 +3,7 @@
 
 .shop-page {
   display: flow-root;
-  background-color: var(--amber-50);
+  background-color: var(--warm);
   line-height: normal;
 }
 
@@ -71,7 +71,7 @@
   margin-top: 40px;
   padding: 60px 20px;
   /* Starts as the page's light tan and deepens into golden honey toward the footer */
-  background: linear-gradient(180deg, var(--amber-50) 0%, #fde7a9 55%, #f7c95c 100%);
+  background: linear-gradient(180deg, var(--warm) 0%, var(--why-shop-mid) 55%, var(--why-shop-end) 100%);
 }
 
 .why-shop-grid {
@@ -84,7 +84,7 @@
 
 .why-shop-card {
   padding: 30px;
-  background: var(--white);
+  background: var(--card);
   border-radius: 8px;
   box-shadow: 0 6px 18px rgb(184 106 0 / 0.14);
   text-align: center;
@@ -132,8 +132,8 @@
   align-items: center;
   gap: 0.8rem;
   padding: 0.6rem 1.4rem 0.6rem 0.6rem;
-  background: var(--white);
-  color: var(--navy);
+  background: var(--card);
+  color: var(--heading);
   border-radius: 999px;
   box-shadow: 0 6px 20px rgb(0 0 0 / 0.15);
   transition:
@@ -154,7 +154,7 @@
   place-items: center;
   width: 52px;
   height: 52px;
-  background: var(--navy);
+  background: var(--btn-dark);
   color: var(--honey-light);
   border: 3px solid var(--honey-light);
   border-radius: 50%;

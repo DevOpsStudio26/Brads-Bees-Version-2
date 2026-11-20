@@ -68,6 +68,39 @@
   outline-offset: 2px;
 }
 
+/* Light/dark switch: a round button at the far right of the navbar */
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--header-border);
+  border-radius: var(--radius-full);
+  background: none;
+  color: var(--text);
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.theme-toggle:hover {
+  background: var(--gray-50);
+  color: var(--gold);
+}
+
+.theme-toggle:active {
+  transform: scale(0.92);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
 .main-nav ul {
   list-style: none;
   margin: 0;
@@ -121,9 +154,17 @@
     margin-block: -16px;
   }
 
+  /* Theme button sits just left of the menu button */
+  .theme-toggle {
+    order: 1;
+    margin-left: auto;
+  }
+
   .menu-toggle {
+    order: 2;
     display: grid;
     place-items: center;
+    margin-left: 0;
   }
 
   .header-menu {

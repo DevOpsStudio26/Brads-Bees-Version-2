@@ -22,6 +22,17 @@
   line-height: normal;
 }
 
+:root[data-theme='dark'] .edu-page {
+  --edu-bg-cream: #17150f;
+  --edu-bg-soft: #15181f;
+  --edu-card-cream: #221f17;
+  --edu-card-light: #1d222c;
+  --edu-navy: #f1f3f8;
+  --edu-text: #e6e8ee;
+  --edu-muted: #aab3c3;
+  --edu-shadow: 0 8px 18px rgb(0 0 0 / 0.35);
+}
+
 .edu-page h1,
 .edu-page h2,
 .edu-page h3 {
@@ -285,7 +296,7 @@
 .edu-btn-email {
   justify-content: center;
   padding: 0 1.5rem 0 4.5rem;
-  background: var(--edu-navy);
+  background: var(--btn-dark);
   color: var(--white);
   box-shadow: 0 6px 14px rgb(10 18 35 / 0.22);
 }
@@ -303,13 +314,13 @@
 .edu-btn-message {
   justify-content: flex-start;
   padding: 1rem 2.5rem;
-  background: var(--white);
+  background: var(--card);
   color: var(--edu-message);
   box-shadow: 0 2px 16px rgb(0 0 0 / 0.07);
 }
 
 .edu-btn-email:hover {
-  background: var(--white);
+  background: var(--card);
   color: var(--edu-message);
   box-shadow: 0 2px 16px rgb(0 0 0 / 0.07);
 }

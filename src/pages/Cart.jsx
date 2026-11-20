@@ -8,7 +8,7 @@ export default function Cart() {
 
   if (items.length === 0) {
     return (
-      <div className="bg-[var(--amber-50)]">
+      <div className="bg-[var(--warm)]">
         <div className="mx-auto max-w-6xl px-4 py-24 text-center">
           <ShoppingBag size={48} className="mx-auto mb-4 text-gray-300" />
           <h1 className="mb-2 text-2xl font-bold text-navy">Your cart is empty</h1>
@@ -25,7 +25,7 @@ export default function Cart() {
   }
 
   return (
-    <div className="bg-[var(--amber-50)]">
+    <div className="bg-[var(--warm)]">
       <div className="mx-auto max-w-6xl px-4 py-16">
         <h1 className="mb-8 text-3xl font-bold text-navy">Your Cart</h1>
         <div className="grid gap-8 lg:grid-cols-3">
@@ -33,13 +33,13 @@ export default function Cart() {
             {items.map((item) => (
               <div
                 key={item.id}
-                className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-gray-200 bg-white p-4 shadow-sm"
+                className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-gray-200 bg-card p-4 shadow-sm"
               >
                 <div className="flex items-center gap-4">
                   <img
                     src={item.image}
                     alt={productLabel(item)}
-                    className={`h-16 w-16 shrink-0 rounded-lg bg-[#f9f9f9] ${
+                    className={`h-16 w-16 shrink-0 rounded-lg bg-[var(--shop-bg)] ${
                       item.imageFit === 'cover' ? 'object-cover' : 'object-contain p-1'
                     }`}
                   />
@@ -86,7 +86,7 @@ export default function Cart() {
             ))}
           </div>
 
-          <div className="h-fit rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+          <div className="h-fit rounded-xl border border-gray-200 bg-card p-6 shadow-sm">
             <h2 className="mb-4 text-lg font-bold text-navy">Order Summary</h2>
             <div className="space-y-2 text-sm text-gray-600">
               <div className="flex justify-between">

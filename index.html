@@ -10,6 +10,19 @@
       content="Humane honeybee removal and local raw honey in Sun, Louisiana. Bees are relocated, never killed. Call 985-612-0241, available 24/7."
     />
     <meta name="theme-color" content="#d98500" />
+    <!-- Apply the saved (or device) light/dark theme before the page paints -->
+    <script>
+      (function () {
+        var theme
+        try {
+          theme = localStorage.getItem('theme')
+        } catch (e) {}
+        if (theme !== 'dark' && theme !== 'light') {
+          theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+        }
+        document.documentElement.dataset.theme = theme
+      })()
+    </script>
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Brad's Bees" />
     <meta property="og:title" content="Brad's Bees - Honeybee Removal & Local Honey" />

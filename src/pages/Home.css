@@ -12,7 +12,7 @@
   font-weight: 500;
   line-height: 1.3;
   text-align: center;
-  color: var(--gray-900);
+  color: var(--text-strong);
 }
 
 .section-title {
@@ -25,7 +25,7 @@
 
 .section-subtitle {
   text-align: center;
-  color: var(--gray-600);
+  color: var(--text-muted);
   margin-bottom: var(--space-12);
 }
 
@@ -33,7 +33,7 @@
    Hero
    ========================================================= */
 .hero-section {
-  background-color: var(--amber-50);
+  background-color: var(--warm);
 }
 
 .hero-container {
@@ -51,12 +51,12 @@
   font-weight: 700;
   line-height: 1;
   margin: 0 0 var(--space-8);
-  color: var(--gray-900);
+  color: var(--text-strong);
 }
 
 .hero-subtitle {
   font-size: var(--font-size-xl);
-  color: var(--gray-700);
+  color: var(--text-soft);
   margin-bottom: var(--space-8);
   line-height: 1.6;
 }
@@ -85,7 +85,7 @@
    ========================================================= */
 .about-section {
   padding-block: var(--space-16);
-  background-color: var(--white);
+  background-color: var(--card);
 }
 
 .about-container {
@@ -115,7 +115,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
-  color: var(--gray-700);
+  color: var(--text-soft);
 }
 
 /* =========================================================
@@ -125,14 +125,14 @@
    The top and bottom 140px fade from the white sections above and below into the
    honeycomb, so it blends in instead of starting and stopping at a hard line. */
 .honeycomb-band {
-  background-color: var(--amber-50);
+  background-color: var(--warm);
   background-image:
     linear-gradient(
       180deg,
-      var(--white) 0,
+      var(--card) 0,
       transparent 140px,
       transparent calc(100% - 140px),
-      var(--white) 100%
+      var(--card) 100%
     ),
     var(--honeycomb-pattern);
   background-size:
@@ -163,7 +163,7 @@
   width: 100%;
   height: 11rem;
   padding: 0 var(--space-8) 5rem;
-  background-color: var(--gray-900);
+  background-color: var(--feature-card);
   color: var(--white);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-lg);
@@ -172,7 +172,7 @@
 }
 
 .service-card:hover {
-  background-color: var(--gray-800);
+  background-color: var(--feature-card-hover);
   box-shadow: var(--shadow-2xl);
   transform: scale(1.05);
   text-decoration: none;
@@ -352,7 +352,7 @@
    ========================================================= */
 .contact-section {
   padding-block: var(--space-16);
-  background-color: var(--white);
+  background-color: var(--card);
 }
 
 .contact-container {
@@ -398,7 +398,7 @@
   align-items: flex-start;
   gap: var(--space-4);
   padding: var(--space-4);
-  background-color: var(--amber-50);
+  background-color: var(--warm);
   border-radius: var(--radius-lg);
 }
 
@@ -420,12 +420,12 @@
 }
 
 .contact-info-text {
-  color: var(--gray-900);
+  color: var(--text-strong);
 }
 
 .contact-info-subtext {
   font-size: var(--font-size-sm);
-  color: var(--gray-600);
+  color: var(--text-muted);
 }
 
 /* Bigger tap area for the phone, email and map links on touch screens,

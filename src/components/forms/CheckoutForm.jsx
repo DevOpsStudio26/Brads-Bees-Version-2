@@ -61,14 +61,14 @@ export default function CheckoutForm({ onSuccess }) {
   }
 
   const inputClass =
-    'w-full rounded-lg border border-gray-300 bg-white px-3 py-2.5 text-base text-navy outline-none transition placeholder:text-gray-400 focus:border-gold focus:ring-1 focus:ring-gold'
+    'w-full rounded-lg border border-gray-300 bg-card px-3 py-2.5 text-base text-navy outline-none transition placeholder:text-gray-400 focus:border-gold focus:ring-1 focus:ring-gold'
   const labelClass = 'mb-1 block text-sm font-medium text-navy'
   const errorClass = 'mt-1 text-xs text-error'
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-4 rounded-xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8"
+      className="space-y-4 rounded-xl border border-gray-200 bg-card p-6 shadow-sm sm:p-8"
     >
       <h2 className="text-lg font-bold text-navy">Billing Details</h2>
 
