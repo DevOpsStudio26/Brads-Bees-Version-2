@@ -1,0 +1,22 @@
+// Cloudflare Workers config for Brad's copy of the site (Railway uses server.js instead).
+// Deploy with: npm run deploy:cloudflare
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "brads-bees",
+  "main": "worker.js",
+  "compatibility_date": "2025-09-01",
+  // Lets the Worker use Node's Buffer for photo attachments
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    // Any other page loads the React app, which handles the route itself
+    "not_found_handling": "single-page-application",
+    // Only form submissions wake the Worker; everything else is served straight from dist/
+    "run_worker_first": ["/api/*"]
+  },
+  "vars": {
+    "CONTACT_TO_EMAIL": "bradbessetti@gmail.com"
+  },
+  "observability": { "enabled": true }
+}
