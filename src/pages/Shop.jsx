@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Award, Droplet, Leaf, ShoppingBag } from 'lucide-react'
 import ProductCard from '../components/ui/ProductCard'
 import Toast from '../components/ui/Toast'
-import { products } from '../data/products'
+import { useContent } from '../hooks/useContent'
 import { useCart } from '../hooks/useCart'
 import './Shop.css'
 
@@ -28,6 +28,7 @@ const reasons = [
 ]
 
 export default function Shop() {
+  const { products } = useContent()
   const { addItem, itemCount, subtotal } = useCart()
   const [toastText, setToastText] = useState('')
   const toastTimer = useRef(null)

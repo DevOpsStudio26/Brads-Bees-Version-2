@@ -1,6 +1,8 @@
 // Cloudflare version of server.js, for Brad's own domain. Cloudflare serves the
 // built site from dist/ (see wrangler.jsonc) and only runs this for /api/*,
 // turning the contact form and checkout into emails to Brad through Resend.
+// Each one is also saved to the database for the admin page (see admin.js),
+// which is the only part of /api/admin/* this file doesn't handle itself.
 //
 // Settings (Cloudflare dashboard > Workers & Pages > brads-bees > Settings > Variables and Secrets):
 //   RESEND_API_KEY   - secret, from resend.com > API Keys (required to send email)
@@ -21,6 +23,8 @@ import {
   createMailer,
   isImage,
 } from './emails.js'
+import { handleAdmin, saveOrder, saveRequest } from './admin.js'
+import { handlePublicContent, loadProductCatalog, serveImage } from './content.js'
 
 const json = (body, status = 200) => Response.json(body, { status })
 
@@ -42,7 +46,28 @@ function isRateLimited(request) {
 
 /* ---------- Contact form ---------- */
 
-async function handleContact(request, sendEmail) {
+// Saves first, then emails. Brad still gets the email if saving fails, and the
+// customer sees success if either one worked, so a resend never doubles up.
+async function saveAndSend(save, sendEmail, message, what) {
+  let saved = false
+  try {
+    if (save) {
+      await save()
+      saved = true
+    }
+  } catch (error) {
+    console.error(`Saving ${what} failed:`, error.message)
+  }
+  try {
+    await sendEmail(message)
+    return true
+  } catch (error) {
+    console.error(`${what} email failed:`, error.message)
+    return saved
+  }
+}
+
+async function handleContact(request, sendEmail, env) {
   let form
   try {
     form = await request.formData()
@@ -59,26 +84,27 @@ async function handleContact(request, sendEmail) {
       if (photos.length >= MAX_PHOTOS || value.size > MAX_PHOTO_BYTES) {
         return json({ error: PHOTO_LIMIT_ERROR }, 413)
       }
-      photos.push({ filename: value.name, content: Buffer.from(await value.arrayBuffer()) })
+      photos.push({
+        filename: value.name,
+        content: Buffer.from(await value.arrayBuffer()),
+        contentType: value.type || 'application/octet-stream',
+      })
     }
   }
 
-  const { message, error, spam } = buildContactEmail(fields, photos)
+  const attachments = photos.map(({ filename, content }) => ({ filename, content }))
+  const { message, contact, error, spam } = buildContactEmail(fields, attachments)
   if (spam) return json({ ok: true })
   if (error) return json({ error }, 400)
 
-  try {
-    await sendEmail(message)
-    return json({ ok: true })
-  } catch (error) {
-    console.error('Contact email failed:', error.message)
-    return json({ error: 'Could not send. Please call us directly.' }, 500)
-  }
+  const save = env.DB ? () => saveRequest(env, contact, photos) : null
+  if (await saveAndSend(save, sendEmail, message, 'Contact')) return json({ ok: true })
+  return json({ error: 'Could not send. Please call us directly.' }, 500)
 }
 
 /* ---------- Orders ---------- */
 
-async function handleOrder(request, sendEmail) {
+async function handleOrder(request, sendEmail, env) {
   const raw = await request.text()
   let body
   try {
@@ -88,16 +114,14 @@ async function handleOrder(request, sendEmail) {
     return json({ error: 'Please check the order and try again.' }, 400)
   }
 
-  const { message, error } = buildOrderEmail(body)
+  // Prices and stock as Brad last saved them in the admin
+  const catalog = await loadProductCatalog(env)
+  const { message, order, error } = buildOrderEmail(body, catalog ?? undefined)
   if (error) return json({ error }, 400)
 
-  try {
-    await sendEmail(message)
-    return json({ ok: true })
-  } catch (error) {
-    console.error('Order email failed:', error.message)
-    return json({ error: 'Could not place the order. Please call us directly.' }, 500)
-  }
+  const save = env.DB ? () => saveOrder(env, order) : null
+  if (await saveAndSend(save, sendEmail, message, 'Order')) return json({ ok: true })
+  return json({ error: 'Could not place the order. Please call us directly.' }, 500)
 }
 
 /* ---------- Routing ---------- */
@@ -109,7 +133,12 @@ const routes = {
 
 export default {
   async fetch(request, env) {
-    const handler = routes[new URL(request.url).pathname]
+    const { pathname } = new URL(request.url)
+    if (pathname === '/api/admin' || pathname.startsWith('/api/admin/')) return handleAdmin(request, env)
+    if (request.method === 'GET' && pathname === '/api/content') return handlePublicContent(env)
+    if (request.method === 'GET' && pathname.startsWith('/api/images/')) return serveImage(env, pathname)
+
+    const handler = routes[pathname]
     if (!handler) return env.ASSETS.fetch(request)
     if (request.method !== 'POST') return json({ error: 'Not found' }, 404)
     if (isRateLimited(request)) {
@@ -122,6 +151,6 @@ export default {
       from: env.EMAIL_FROM || "Brad's Bees Website <onboarding@resend.dev>",
       dryRun: env.EMAIL_DRY_RUN === 'true',
     })
-    return handler(request, sendEmail)
+    return handler(request, sendEmail, env)
   },
 }

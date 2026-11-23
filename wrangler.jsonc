@@ -18,5 +18,19 @@
   "vars": {
     "CONTACT_TO_EMAIL": "bradbessetti@gmail.com"
   },
+  // Saved orders and contact requests for the admin page (/admin).
+  // Create the real database once with: npx wrangler d1 create brads-bees
+  // then paste the database_id it prints here. Local testing works without it.
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "brads-bees",
+      "database_id": "REPLACE_WITH_ID_FROM_WRANGLER_D1_CREATE",
+      "migrations_dir": "migrations"
+    }
+  ],
+  // Photos customers attach to the contact form.
+  // Create the real bucket once with: npx wrangler r2 bucket create brads-bees-photos
+  "r2_buckets": [{ "binding": "PHOTOS", "bucket_name": "brads-bees-photos" }],
   "observability": { "enabled": true }
 }

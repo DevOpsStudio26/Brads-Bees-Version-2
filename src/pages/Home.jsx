@@ -4,8 +4,7 @@ import { ChevronLeft, ChevronRight, Clock, Mail, MapPin, Phone } from 'lucide-re
 import StatCard from '../components/ui/StatCard'
 import TestimonialCard from '../components/ui/TestimonialCard'
 import ContactForm from '../components/forms/ContactForm'
-import { testimonials } from '../data/testimonials'
-import { siteInfo } from '../data/siteInfo'
+import { useContent } from '../hooks/useContent'
 import heroLogo from '../assets/images/hero-logo.webp'
 import bradPhoto from '../assets/images/brad-with-bees.webp'
 import honeyPreview from '../assets/images/honey-preview.webp'
@@ -29,6 +28,7 @@ const quickLinks = [
 ]
 
 export default function Home() {
+  const { siteInfo, testimonials } = useContent()
   // The reviews loop: the arrows move one review along, and CSS decides how
   // many show at once (3 on desktop, 2 on tablets, 1 on phones).
   const [reviewStart, setReviewStart] = useState(0)

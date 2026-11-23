@@ -1,10 +1,11 @@
 // Builds the contact and order emails sent to Brad. Shared by both hosts:
 // server.js (Railway) and worker.js (Cloudflare), so the emails stay identical.
 //
-// Each builder returns { message } ready for Resend, { error } when the form
-// is invalid, or { spam: true } when a bot filled in the hidden field.
+// Each builder returns { message } ready for Resend (plus the checked form data,
+// as contact or order, so worker.js can save it for the admin page), { error }
+// when the form is invalid, or { spam: true } when a bot filled in the hidden field.
 
-import { getCatalogProduct, productLabel, shippingFor } from './src/data/productCatalog.js'
+import { productCatalog, productLabel, shippingFor } from './src/data/productCatalog.js'
 import { isValidEmail, isValidName, isValidPhone } from './src/lib/validation.js'
 
 // Resend allows 40MB per email after encoding, so cap photos well under that
@@ -82,6 +83,7 @@ export function buildContactEmail(body = {}, photos = []) {
   ])
 
   return {
+    contact,
     message: {
       replyTo: contact.email,
       subject: `New ${contact.service || 'website'} request from ${contact.name}`,
@@ -93,7 +95,10 @@ export function buildContactEmail(body = {}, photos = []) {
 
 /* ---------- Orders ---------- */
 
-export function buildOrderEmail({ customer = {}, items = [] } = {}) {
+// catalog: the products as Brad last saved them in the admin (worker.js passes
+// them in); without it, the original list in src/data/productCatalog.js
+export function buildOrderEmail({ customer = {}, items = [] } = {}, catalog = productCatalog) {
+  const getCatalogProduct = (id) => catalog.find((product) => product.id === id)
   const buyer = {
     name: text(customer.name, 100),
     email: text(customer.email, 200),
@@ -110,6 +115,11 @@ export function buildOrderEmail({ customer = {}, items = [] } = {}) {
     .slice(0, 50)
     .map(({ id, qty } = {}) => ({ product: getCatalogProduct(id), qty: Number(qty) }))
     .filter(({ product, qty }) => product && Number.isInteger(qty) && qty > 0 && qty <= 100)
+
+  const soldOut = lines.find(({ product }) => product.inStock === false)
+  if (soldOut) {
+    return { error: `Sorry, ${productLabel(soldOut.product)} just sold out. Please remove it from your cart.` }
+  }
 
   if (
     lines.length === 0 ||
@@ -157,6 +167,7 @@ export function buildOrderEmail({ customer = {}, items = [] } = {}) {
   ])
 
   return {
+    order: { buyer, lines, subtotal, shipping, total },
     message: {
       replyTo: buyer.email,
       subject: `New order from ${buyer.name} - ${money(total)}`,

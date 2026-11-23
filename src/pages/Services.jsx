@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Tabs from '../components/ui/Tabs'
-import { serviceTabs } from '../data/services'
-import { siteInfo } from '../data/siteInfo'
+import { useContent } from '../hooks/useContent'
 import './Services.css'
 
 function CheckItem({ children }) {
@@ -105,6 +104,7 @@ function PackageCard({ heading, title, price, items }) {
 }
 
 function ServiceCta({ title, text }) {
+  const { siteInfo } = useContent()
   return (
     <section className="service-contact">
       <h2>{title}</h2>
@@ -122,8 +122,9 @@ function ServiceCta({ title, text }) {
 }
 
 export default function Services() {
+  const { services: serviceTabs } = useContent()
   const [activeId, setActiveId] = useState(serviceTabs[0].id)
-  const service = serviceTabs.find((tab) => tab.id === activeId)
+  const service = serviceTabs.find((tab) => tab.id === activeId) ?? serviceTabs[0]
 
   function handleTabChange(id) {
     setActiveId(id)

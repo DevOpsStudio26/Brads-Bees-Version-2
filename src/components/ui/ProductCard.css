@@ -159,6 +159,15 @@
   transform: scale(0.96);
 }
 
+/* Brad marked this product sold out in the admin */
+.add-to-cart-btn.is-sold-out,
+.add-to-cart-btn.is-sold-out:hover {
+  padding: 0.5rem 1rem;
+  background: var(--gray-600);
+  cursor: not-allowed;
+  transform: none;
+}
+
 @media (max-width: 760px) {
   .product-image {
     height: 190px;

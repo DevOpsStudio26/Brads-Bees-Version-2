@@ -1,18 +1,19 @@
 import { useEffect, useMemo, useState } from 'react'
 import { CartContext } from './CartContext'
-import { getProduct } from '../data/products'
 import { shippingFor } from '../data/productCatalog'
+import { useContent } from '../hooks/useContent'
 
 const STORAGE_KEY = 'brads-bees-cart'
 
-// Only { id, qty } is stored. Names and prices always come from the product
-// catalog, so a price change can't leave a stale price in someone's cart.
+// Only { id, qty } is stored. Names and prices always come from the products
+// (as Brad last saved them), so a price change can't leave a stale price in
+// someone's cart. A product Brad removes simply drops out of the cart.
 function loadCart() {
   try {
     const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '[]')
     if (!Array.isArray(parsed)) return []
     return parsed
-      .filter((entry) => getProduct(entry?.id) && Number.isInteger(entry.qty) && entry.qty > 0)
+      .filter((entry) => typeof entry?.id === 'string' && Number.isInteger(entry.qty) && entry.qty > 0)
       .map(({ id, qty }) => ({ id, qty }))
   } catch {
     return []
@@ -28,6 +29,7 @@ function saveCart(lines) {
 }
 
 export function CartProvider({ children }) {
+  const { getProduct } = useContent()
   const [lines, setLines] = useState(loadCart)
 
   useEffect(() => {
@@ -60,7 +62,12 @@ export function CartProvider({ children }) {
       setLines([])
     }
 
-    const items = lines.map((line) => ({ ...getProduct(line.id), qty: line.qty }))
+    const items = lines
+      .map((line) => {
+        const product = getProduct(line.id)
+        return product ? { ...product, qty: line.qty } : null
+      })
+      .filter(Boolean)
     const subtotal = items.reduce((sum, item) => sum + item.price * item.qty, 0)
     const shipping = shippingFor(subtotal)
 
@@ -75,7 +82,7 @@ export function CartProvider({ children }) {
       total: subtotal + shipping,
       itemCount: items.reduce((sum, item) => sum + item.qty, 0),
     }
-  }, [lines])
+  }, [lines, getProduct])
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>
 }

@@ -5,7 +5,8 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  // .wrangler holds Cloudflare's local test files and build output
+  globalIgnores(['dist', '.wrangler']),
   {
     files: ['**/*.{js,jsx}'],
     extends: [
@@ -19,8 +20,8 @@ export default defineConfig([
     },
   },
   {
-    // The email server runs in Node, not the browser
-    files: ['server.js'],
+    // The email server and the Vite config run in Node, not the browser
+    files: ['server.js', 'vite.config.js'],
     languageOptions: { globals: globals.node },
   },
 ])

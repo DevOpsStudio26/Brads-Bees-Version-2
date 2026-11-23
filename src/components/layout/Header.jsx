@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { Menu, Moon, Phone, Sun, X } from 'lucide-react'
-import { siteInfo, navLinks } from '../../data/siteInfo'
+import { navLinks } from '../../data/siteInfo'
+import { useContent } from '../../hooks/useContent'
 import { useTheme } from '../../hooks/useTheme'
 import brandLogo from '../../assets/images/brand-logo.webp'
 import './Header.css'
 
 export default function Header() {
+  const { siteInfo } = useContent()
   const { pathname } = useLocation()
   // Remember which page the menu was opened on, so it closes itself after navigating.
   const [menuOpenOn, setMenuOpenOn] = useState(null)

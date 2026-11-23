@@ -1,0 +1,12 @@
+# Copy this file to .dev.vars for local testing with `npm run worker`.
+# Never commit the real .dev.vars (it's in .gitignore).
+# On Cloudflare, set these with `npx wrangler secret put <NAME>` instead.
+
+# The password for http://localhost:5173/admin/login while testing
+ADMIN_PASSWORD=bees-test
+
+# Any long random string. It signs the login cookie.
+SESSION_SECRET=change-me-to-a-long-random-string-for-local-testing
+
+# Print form emails in the terminal instead of sending them
+EMAIL_DRY_RUN=true

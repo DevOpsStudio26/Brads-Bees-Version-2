@@ -45,15 +45,21 @@ export default function ProductCard({ product, onAdd }) {
           </span>
         </div>
         {/* The price doubles as the add button */}
-        <button
-          type="button"
-          className="add-to-cart-btn"
-          onClick={() => onAdd(product)}
-          aria-label={`Add ${label} to cart, ${price}`}
-        >
-          <span>{price}</span>
-          <Plus aria-hidden="true" />
-        </button>
+        {product.inStock ? (
+          <button
+            type="button"
+            className="add-to-cart-btn"
+            onClick={() => onAdd(product)}
+            aria-label={`Add ${label} to cart, ${price}`}
+          >
+            <span>{price}</span>
+            <Plus aria-hidden="true" />
+          </button>
+        ) : (
+          <button type="button" className="add-to-cart-btn is-sold-out" disabled>
+            <span>Sold out</span>
+          </button>
+        )}
       </div>
     </article>
   )

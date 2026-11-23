@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom'
 import { Mail } from 'lucide-react'
-import { educationPrograms, learningTopics, missionIcon } from '../data/education'
-import { siteInfo } from '../data/siteInfo'
+import { missionIcon } from '../data/education'
+import { useContent } from '../hooks/useContent'
 import './Education.css'
 
 export default function Education() {
+  const { siteInfo, education } = useContent()
+  const { programs: educationPrograms, topics: learningTopics } = education
   return (
     <div className="edu-page">
       <title>Education - Brad&apos;s Bees</title>

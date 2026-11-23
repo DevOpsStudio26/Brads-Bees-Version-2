@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom'
-import { siteInfo } from '../data/siteInfo'
+import { useContent } from '../hooks/useContent'
 import './NotFound.css'
 
 // Shown for any address that isn't a real page
 export default function NotFound() {
+  const { siteInfo } = useContent()
   return (
     <section className="not-found">
       <title>Page Not Found - Brad&apos;s Bees</title>

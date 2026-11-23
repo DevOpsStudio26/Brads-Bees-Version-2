@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom'
 import { Mail, Phone, MapPin } from 'lucide-react'
-import { siteInfo, navLinks } from '../../data/siteInfo'
+import { navLinks } from '../../data/siteInfo'
+import { useContent } from '../../hooks/useContent'
 import brandLogo from '../../assets/images/brand-logo.webp'
 import './Footer.css'
 
 export default function Footer() {
+  const { siteInfo } = useContent()
   return (
     <footer className="site-footer">
       <div className="footer-brand">

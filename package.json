@@ -11,6 +11,9 @@
     "start": "node server.js",
     "server": "node --watch --env-file-if-exists=.env server.js",
     "dev:cloudflare": "vite build && wrangler dev",
+    "worker": "wrangler dev",
+    "db:setup:local": "wrangler d1 migrations apply brads-bees --local",
+    "db:setup:remote": "wrangler d1 migrations apply brads-bees --remote",
     "deploy:cloudflare": "vite build && wrangler deploy"
   },
   "dependencies": {

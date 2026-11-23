@@ -1,19 +1,21 @@
 import { useRef, useState } from 'react'
 import Tabs from '../components/ui/Tabs'
-import { galleryCategories, galleryPhotos } from '../data/gallery'
+import { useContent } from '../hooks/useContent'
 import './Gallery.css'
 
-// Each filter shows how many photos it has
-const filters = ['All', ...galleryCategories].map((category) => ({
-  id: category,
-  label: category,
-  count:
-    category === 'All'
-      ? galleryPhotos.length
-      : galleryPhotos.filter((photo) => photo.category === category).length,
-}))
-
 export default function Gallery() {
+  const { gallery } = useContent()
+  const { categories: galleryCategories, photos: galleryPhotos } = gallery
+  // Each filter shows how many photos it has
+  const filters = ['All', ...galleryCategories].map((category) => ({
+    id: category,
+    label: category,
+    count:
+      category === 'All'
+        ? galleryPhotos.length
+        : galleryPhotos.filter((photo) => photo.category === category).length,
+  }))
+
   const [activeFilter, setActiveFilter] = useState('All')
   const [previewIndex, setPreviewIndex] = useState(null)
   const previewRef = useRef(null)
